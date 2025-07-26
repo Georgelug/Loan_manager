@@ -1,4 +1,5 @@
 from imports import *
+from typing import ClassVar
 
 class Client(BaseModel):
     id: int = 0
@@ -6,7 +7,7 @@ class Client(BaseModel):
     correo: str = ""
     rfc: str = ""
     fecha_alta: datetime
-    format_date: str = "%d/%m/%Y"
+    format_date: ClassVar[str] = "%d/%m/%Y"
 
     @validator("fecha_alta", pre=True)
     def get_date(cls,value):
