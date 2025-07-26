@@ -1,9 +1,8 @@
 from imports import *
 from models.Client import Client
 from models.Loan import Loan, Status
-
-
-Base = declarative_base()
+from sqlalchemy import Enum
+from database import Base
 
 class LoanModel(Base):
     __tablename__ = 'Loans'

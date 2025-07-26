@@ -6,6 +6,7 @@ from Utils.db import DB
 from db_models.Client_db_model import ClientModel 
 from db_models.Loan_db_model import LoanModel
 
+
 def create_client(client: Client, db: Session) -> ClientModel:
     try:
         db_client = ClientModel(
@@ -59,14 +60,18 @@ def main_flow():
 
     print(f"Cliente creado: {result_client}")
 
-    loan1 = Loan(
-        client_id = result_client.id,
-        amount = 100.00,
-        fecha_otorgamiento = "01/01/2025",
-        status = Status.ACTIVE
+    # Create loan directly in database model to avoid enum conversion issues
+    new_loan = LoanModel(
+        client_id=result_client.id,
+        amount=100.00,
+        fecha_otorgamiento=datetime.strptime("01/01/2025", "%d/%m/%Y"),
+        status=Status.activo
     )
 
-    result_loan = create_loan(loan=loan1,db=db)
+    db.add(new_loan)
+    db.commit()
+    db.refresh(new_loan)
+    result_loan = new_loan
     
     print(f"Prestamo otorgado: {result_loan}")
 

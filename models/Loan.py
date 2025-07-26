@@ -4,9 +4,9 @@ from enum import Enum
 from typing import ClassVar
 
 class Status(Enum):
-    ACTIVE = "activo"
-    PAID = "pagado"
-    OVERDUE = "vencido"
+    activo = "activo"
+    pagado = "pagado"
+    vencido = "vencido"
 
 
 class Loan(BaseModel):

@@ -1,8 +1,7 @@
 from imports import *
 from models.Client import Client
 from models.Loan import Loan
-
-Base = declarative_base()
+from database import Base
 
 
 class ClientModel(Base):
